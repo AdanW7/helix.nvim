@@ -12,23 +12,23 @@ end
 ---Apply the colorscheme
 function M.colorscheme()
     vim.cmd("hi clear")
-    if vim.fn.exists("syntax_on") then 
-        vim.cmd("syntax reset") 
+    if vim.fn.exists("syntax_on") then
+        vim.cmd("syntax reset")
     end
     vim.o.termguicolors = true
     vim.g.colors_name = "helix"
-    
+
     require('helix.highlights').setup()
     require('helix.terminal').setup()
 end
 
 local default_config = {
     -- Main options --
-    transparent = false,     -- don't set background
-    term_colors = true,      -- if true enable the terminal
-    ending_tildes = false,   -- show the end-of-buffer tildes
-    cmp_itemkind_reverse = false,    -- reverse item kind highlights in cmp menu
-    
+    transparent = false,          -- don't set background
+    term_colors = true,           -- if true enable the terminal
+    ending_tildes = false,        -- show the end-of-buffer tildes
+    cmp_itemkind_reverse = false, -- reverse item kind highlights in cmp menu
+
     -- Changing Formats --
     code_style = {
         comments = 'italic',
@@ -38,11 +38,11 @@ local default_config = {
         variables = 'none',
         constants = 'none',
     },
-    
+
     -- Custom Highlights --
-    colors = {}, -- Override default colors
+    colors = {},     -- Override default colors
     highlights = {}, -- Override highlight groups
-    
+
     -- Plugins Related --
     diagnostics = {
         darker = false,

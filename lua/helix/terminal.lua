@@ -3,9 +3,9 @@ local M = {}
 function M.setup()
     local cfg = vim.g.helix_config
     if not cfg.term_colors then return end
-    
+
     local c = require('helix.colors').setup()
-    
+
     vim.g.terminal_color_0 = c.black
     vim.g.terminal_color_1 = c.red
     vim.g.terminal_color_2 = c.green
