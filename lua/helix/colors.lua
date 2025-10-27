@@ -32,6 +32,7 @@ M.palette = {
     peach = "#f2b5a7",
     mint = "#5de6a8",
     lavendar = "#c8a8e8",
+    coral = "#FF7F50",
     ["soft-teal"] = "#a8d4d4",
 
     -- UI colors
