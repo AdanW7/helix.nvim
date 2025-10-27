@@ -72,7 +72,7 @@ hl.common = {
     Search = { fg = c.bg0, bg = c.bg_yellow },
     Substitute = { fg = c.bg0, bg = c.green },
 
-    MatchParen = { bg = c.mint, fg = c.coral, fmt = "bold,underline," },
+    MatchParen = { bg = c.mint, fg = c.dark_grey, fmt = "bold,underline," },
     NonText = { fg = c.grey },
     Whitespace = { fg = c.dark_grey },
     SpecialKey = { fg = c.grey },
