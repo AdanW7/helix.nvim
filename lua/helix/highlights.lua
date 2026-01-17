@@ -169,13 +169,14 @@ if vim.api.nvim_call_function("has", { "nvim-0.8" }) == 1 then
         ["@constant"] = { fg = c.cyan, fmt = cfg.code_style.constants },
         ["@constant.builtin"] = { fg = c.blue },
         ["@constant.builtin.boolean"] = { fg = c.cyan, fmt = "bold,italic" },
-        ["@constant.macro"] = colors.Orange,
+        ["@constant.macro"] = colors.Blue,
 
         ["@string"] = { fg = c.green, fmt = cfg.code_style.strings },
         ["@string.escape"] = colors.Blue,
         ["@string.special"] = colors.Blue,
         ["@string.special.symbol"] = colors.Red,
-        ["@string.regexp"] = colors.Green,
+        ["@string.special.url"] = colors.Blue,
+        ["@string.regexp"] = colors.Peach,
 
         ["@character"] = colors.Blue,
         ["@number"] = colors.Yellow,
@@ -189,14 +190,17 @@ if vim.api.nvim_call_function("has", { "nvim-0.8" }) == 1 then
         ["@constructor"] = { fg = c.blue },
 
         ["@keyword"] = { fg = c.blue, fmt = cfg.code_style.keywords },
-        ["@keyword.control.conditional"] = { fg = c.red },
-        ["@keyword.control.exception"] = colors.Purple,
-        ["@keyword.control.import"] = { fg = c.red },
-        ["@keyword.control.repeat"] = { fg = c.yellow },
-        ["@keyword.control.return"] = colors.Blue,
+        ["@keyword.coroutine"] = colors.Peach,
         ["@keyword.function"] = colors.Blue,
         ["@keyword.operator"] = colors.Blue,
-        ["@keyword.directive"] = colors.Purple,
+        ["@keyword.type"] = colors.Mint,
+        ["@keyword.modifier"] = colors.Cyan,
+        ["@keyword.control.import"] = colors.Blue,
+        ["@keyword.control.conditional"] = colors.Red,
+        ["@keyword.control.exception"] = colors.Purple,
+        ["@keyword.control.repeat"] = { fg = c.yellow },
+        ["@keyword.control.return"] = colors.Blue,
+        ["@keyword.directive"] = colors.Peach,
 
         ["@operator"] = { fg = c.white },
         ["@punctuation.delimiter"] = colors.Mint,
@@ -204,7 +208,7 @@ if vim.api.nvim_call_function("has", { "nvim-0.8" }) == 1 then
         ["@punctuation.special"] = colors.Mint,
 
         ["@comment"] = { fg = c.light_grey, fmt = cfg.code_style.comments },
-        ["@comment.todo"] = { fg = c.red, fmt = cfg.code_style.comments },
+        ["@comment.todo"] = { fg = c.cyan, fmt = cfg.code_style.comments },
 
         ["@tag"] = colors.Blue,
         ["@tag.attribute"] = colors.Blue,
@@ -228,9 +232,13 @@ if vim.api.nvim_call_function("has", { "nvim-0.8" }) == 1 then
         ["@markup.quote"] = { fg = c.yellow, fmt = "italic" },
         ["@markup.math"] = colors.Fg,
 
+        ["@markup.link"] = { fg = c.green },
+        ["@markup.link.label"] = { fg = c.green },
         ["@markup.link.url"] = { fg = c.green },
         ["@markup.link.text"] = colors.Red,
         ["@markup.list"] = colors.Peach,
+        ["@markup.list.checked"] = colors.Green,
+        ["@markup.list.unchecked"] = colors.Red,
         ["@markup.raw"] = colors.Cyan,
 
         -- Diffs
@@ -264,7 +272,22 @@ hl.plugins.lsp = {
 
     LspCodeLens = { fg = c.comment, fmt = cfg.code_style.comments },
     LspCodeLensSeparator = { fg = c.comment },
+
 }
+
+hl.lsp_semantic = {
+
+    ["@lsp.mod.abstract"] = { fmt = "italic" },
+    ["@lsp.mod.async"] = { fmt = "italic" },
+    ["@lsp.mod.deprecated"] = { fmt = "strikethrough" },
+    ["@lsp.mod.readonly"] = { fmt = "italic" },
+    ["@lsp.mod.static"] = { fmt = "bold" },
+
+    ["@lsp.typemod.function.async"] = { fg = c.purple, fmt = "italic" },
+    ["@lsp.typemod.variable.readonly"] = { fg = c.orange },
+    ["@lsp.typemod.function.defaultLibrary"] = { fg = c.cyan },
+}
+
 
 -- Popular plugins
 hl.plugins.cmp = {
@@ -320,11 +343,11 @@ function M.setup()
     -- User defined highlights
     for group_name, group_settings in pairs(cfg.highlights) do
         local fg = group_settings.fg and
-        (group_settings.fg:sub(1, 1) == '$' and c[group_settings.fg:sub(2)] or group_settings.fg) or "none"
+            (group_settings.fg:sub(1, 1) == '$' and c[group_settings.fg:sub(2)] or group_settings.fg) or "none"
         local bg = group_settings.bg and
-        (group_settings.bg:sub(1, 1) == '$' and c[group_settings.bg:sub(2)] or group_settings.bg) or "none"
+            (group_settings.bg:sub(1, 1) == '$' and c[group_settings.bg:sub(2)] or group_settings.bg) or "none"
         local sp = group_settings.sp and
-        (group_settings.sp:sub(1, 1) == '$' and c[group_settings.sp:sub(2)] or group_settings.sp) or "none"
+            (group_settings.sp:sub(1, 1) == '$' and c[group_settings.sp:sub(2)] or group_settings.sp) or "none"
 
         vim.api.nvim_command(string.format("highlight %s guifg=%s guibg=%s guisp=%s gui=%s",
             group_name, fg, bg, sp, group_settings.fmt or "none"))

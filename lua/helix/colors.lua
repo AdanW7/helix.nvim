@@ -83,9 +83,9 @@ function M.setup()
         cursorline = p.cursorline,
 
         -- Diff colors
-        diff_add = "#273d27",
-        diff_delete = "#3d2727",
-        diff_change = "#273347",
+        diff_add = p.green,
+        diff_delete = p.red,
+        diff_change = p.blue,
         diff_text = "#2d475d",
 
         -- Dark variants for diagnostics
