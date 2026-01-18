@@ -191,7 +191,7 @@ if vim.api.nvim_call_function("has", { "nvim-0.8" }) == 1 then
 
         ["@keyword"] = { fg = c.blue, fmt = cfg.code_style.keywords },
         ["@keyword.coroutine"] = colors.Peach,
-        ["@keyword.function"] = colors.Blue,
+        ["@keyword.function"] = colors.Mint,
         ["@keyword.operator"] = colors.Blue,
         ["@keyword.type"] = colors.Mint,
         ["@keyword.modifier"] = colors.Cyan,
