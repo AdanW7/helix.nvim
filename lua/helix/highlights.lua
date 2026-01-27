@@ -207,7 +207,7 @@ if vim.api.nvim_call_function('has', { 'nvim-0.8' }) == 1 then
     ['@keyword.control.exception'] = colors.Purple,
     ['@keyword.control.repeat'] = { fg = color.yellow },
     ['@keyword.control.return'] = colors.Blue,
-    ['@keyword.directive'] = colors.Peach,
+    ['@keyword.directive'] = { fg = color.purple, fmt = 'bold' },
 
     ['@operator'] = { fg = color.white },
     ['@punctuation.delimiter'] = colors.Mint,
