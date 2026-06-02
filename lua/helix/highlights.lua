@@ -2,7 +2,7 @@ local color = require('helix.colors').setup()
 local cfg = vim.g.helix_config
 
 local M = {}
-local hl = { langs = {}, plugins = {} }
+local hl = { plugins = {} }
 
 local function vim_highlights(highlights)
   for group_name, group_settings in pairs(highlights) do
@@ -162,11 +162,12 @@ hl.syntax = {
 
   Comment = { fg = color.light_grey, fmt = cfg.code_style.comments },
   SpecialComment = { fg = color.light_grey, fmt = cfg.code_style.comments },
-  Todo = { fg = color.red, fmt = cfg.code_style.comments },
+  Todo = { fg = color.red, fmt = 'bold,italic' },
 }
 
 -- TreeSitter
-if vim.api.nvim_call_function('has', { 'nvim-0.8' }) == 1 then
+-- nvim started to use @variable syntax in 0.8
+if vim.fn.has('nvim-0.8') == 1 then
   hl.treesitter = {
     ['@variable'] = { fg = color.peach, fmt = cfg.code_style.variables },
     ['@variable.builtin'] = { fg = color.blue, fmt = cfg.code_style.variables },
@@ -209,7 +210,7 @@ if vim.api.nvim_call_function('has', { 'nvim-0.8' }) == 1 then
     ['@keyword.control.return'] = colors.Blue,
     ['@keyword.directive'] = { fg = color.purple, fmt = 'bold' },
 
-    ['@operator'] = { fg = color.white },
+    ['@operator'] = { fg = colors.blue },
     ['@punctuation.delimiter'] = colors.Mint,
     ['@punctuation.bracket'] = colors.Mint,
     ['@punctuation.special'] = colors.Mint,
@@ -331,13 +332,25 @@ hl.lsp_semantic = {
 }
 
 -- Popular plugins
-hl.plugins.cmp = {
-  CmpItemAbbr = colors.Fg,
-  CmpItemAbbrDeprecated = { fg = color.light_grey, fmt = 'strikethrough' },
-  CmpItemAbbrMatch = colors.Cyan,
-  CmpItemAbbrMatchFuzzy = { fg = color.cyan, fmt = 'underline' },
-  CmpItemMenu = colors.LightGrey,
-  CmpItemKind = { fg = color.purple, fmt = cfg.cmp_itemkind_reverse and 'reverse' },
+hl.plugins.blink = {
+  BlinkCmpMenu = { fg = color.mint, bg = color.bg1 },
+  BlinkCmpMenuBorder = { fg = color.grey, bg = color.bg1 },
+  BlinkCmpMenuSelection = { fg = color.blue, bg = color.dark_grey },
+  BlinkCmpScrollBarThumb = { bg = color.grey },
+  BlinkCmpScrollBarGutter = { bg = color.bg1 },
+  BlinkCmpLabel = colors.Fg,
+  BlinkCmpLabelDeprecated = { fg = color.light_grey, fmt = 'strikethrough' },
+  BlinkCmpLabelMatch = colors.Cyan,
+  BlinkCmpKind = { fg = color.purple },
+  BlinkCmpSource = colors.LightGrey,
+  BlinkCmpGhostText = { fg = color.grey },
+  BlinkCmpDoc = { fg = color.mint, bg = color.bg1 },
+  BlinkCmpDocBorder = { fg = color.grey, bg = color.bg1 },
+  BlinkCmpDocSeparator = { fg = color.grey, bg = color.bg1 },
+  BlinkCmpDocCursorLine = { bg = color.bg2 },
+  BlinkCmpSignatureHelp = { fg = color.mint, bg = color.bg1 },
+  BlinkCmpSignatureHelpBorder = { fg = color.grey, bg = color.bg1 },
+  BlinkCmpSignatureHelpActiveParameter = { fg = color.orange, fmt = 'bold' },
 }
 
 hl.plugins.gitsigns = {
@@ -356,60 +369,23 @@ hl.plugins.telescope = {
   TelescopeSelection = { bg = color.bg2 },
   TelescopeSelectionCaret = colors.Yellow,
 }
+hl.plugins.snacks = {
+  SnacksPickerBorder = { fg = color.grey, bg = color.bg1 },
+  SnacksPickerTitle = { fg = color.cyan, fmt = 'bold' },
+  SnacksPickerInput = { fg = color.fg, bg = color.bg1 },
+  SnacksPickerMatch = { fg = color.orange, fmt = 'bold' },
+  SnacksPickerSelected = { fg = color.green },
 
-hl.plugins.nvim_tree = {
-  NvimTreeNormal = { fg = color.fg, bg = cfg.transparent and color.none or color.bg_d },
-  NvimTreeVertSplit = { fg = color.bg_d, bg = cfg.transparent and color.none or color.bg_d },
-  NvimTreeRootFolder = { fg = color.orange, fmt = 'bold' },
-  NvimTreeGitDirty = colors.Yellow,
-  NvimTreeGitNew = colors.Green,
-  NvimTreeGitDeleted = colors.Red,
-  NvimTreeSpecialFile = { fg = color.yellow, fmt = 'underline' },
-  NvimTreeIndentMarker = colors.Fg,
-  NvimTreeImageFile = { fg = color.purple },
-  NvimTreeSymlink = colors.Purple,
-  NvimTreeFolderName = colors.Blue,
-}
+  SnacksPickerDir = { fg = color.comment },
 
-hl.plugins.render_markdown = {
-  -- Heading foregrounds (icons)
-  RenderMarkdownH1 = { fg = color.h1_fg },
-  RenderMarkdownH2 = { fg = color.h2_fg },
-  RenderMarkdownH3 = { fg = color.h3_fg },
-  RenderMarkdownH4 = { fg = color.h4_fg },
-  RenderMarkdownH5 = { fg = color.h5_fg },
-  RenderMarkdownH6 = { fg = color.h6_fg },
+  SnacksDashboardHeader = { fg = color.green },
+  SnacksDashboardFooter = { fg = color.red },
+  SnacksDashboardKey = { fg = color.peach },
+  SnacksDashboardDesc = { fg = color.cyan },
+  SnacksDashboardIcon = { fg = color.blue },
 
-  -- Heading backgrounds (subtle tinted)
-  RenderMarkdownH1Bg = { fg = color.h1_fg, bg = color.h1_bg },
-  RenderMarkdownH2Bg = { fg = color.h2_fg, bg = color.h2_bg },
-  RenderMarkdownH3Bg = { fg = color.h3_fg, bg = color.h3_bg },
-  RenderMarkdownH4Bg = { fg = color.h4_fg, bg = color.h4_bg },
-  RenderMarkdownH5Bg = { fg = color.h5_fg, bg = color.h5_bg },
-  RenderMarkdownH6Bg = { fg = color.h6_fg, bg = color.h6_bg },
-
-  -- Code blocks
-  RenderMarkdownCode = { bg = color.bg1 },
-  RenderMarkdownCodeBorder = { bg = color.bg1 },
-  RenderMarkdownCodeInline = { bg = color.bg2 },
-
-  -- Other elements
-  RenderMarkdownBullet = { fg = color.peach },
-  RenderMarkdownDash = { fg = color.comment },
-  RenderMarkdownQuote = { fg = color.yellow },
-  RenderMarkdownChecked = { fg = color.green },
-  RenderMarkdownUnchecked = { fg = color.red },
-  RenderMarkdownTodo = { fg = color.cyan },
-  RenderMarkdownLink = { fg = color.green },
-  RenderMarkdownMath = { fg = color.fg },
-  RenderMarkdownSign = { bg = color.none },
-
-  -- Callouts
-  RenderMarkdownSuccess = { fg = color.green },
-  RenderMarkdownInfo = { fg = color.blue },
-  RenderMarkdownHint = { fg = color.cyan },
-  RenderMarkdownWarn = { fg = color.yellow },
-  RenderMarkdownError = { fg = color.red },
+  SnacksIndent = { fg = '#5f79a6' },
+  SnacksIndentScope = { fg = '#7394cf', fmt = 'bold' },
 }
 
 function M.setup()
@@ -418,6 +394,7 @@ function M.setup()
   if hl.treesitter then
     vim_highlights(hl.treesitter)
   end
+  vim_highlights(hl.lsp_semantic)
   for _, group in pairs(hl.plugins) do
     vim_highlights(group)
   end
