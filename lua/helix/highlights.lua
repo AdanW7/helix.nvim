@@ -427,15 +427,18 @@ hl.plugins.mini_statusline = {
 }
 hl.plugins.tabline = {
   -- Buffers --------------------------------------------------------
-  TablineCurrent = { fg = color.bg0, bg = color.green, fmt = 'bold' }, -- active buffer
+  TablineCurrent = { fg = color.bg0, bg = color.blue, fmt = 'bold' }, -- active buffer
   TablineVisible = { fg = color.white, bg = color.bg_d }, -- buffer visible in a non-focused window
   TablineHidden = { fg = color.comment, bg = color.bg_d }, -- buffer not visible in any window
-  TablineModifiedCurrent = { fg = color.purple, bg = color.green, fmt = 'bold' }, -- active buffer, unsaved
+  TablineModifiedCurrent = { fg = color.yellow, bg = color.blue, fmt = 'bold' }, -- active buffer, unsaved
   TablineModifiedVisible = { fg = color.yellow, bg = color.bg_d }, -- visible buffer, unsaved
   TablineModifiedHidden = { fg = color.yellow, bg = color.bg_d }, -- hidden buffer, unsaved
 
+  TablineDiagError = { fg = color.red, bg = color.blue, fmt = 'bold' },
+  TablineDiagWarn = { fg = color.yellow, bg = color.blue, fmt = 'bold' },
+
   -- Tab pills ------------------------------------------------------
-  TablineTabActive = { fg = color.bg0, bg = color.cyan, fmt = 'bold' }, -- current tab
+  TablineTabActive = { fg = color.bg0, bg = color.blue, fmt = 'bold' }, -- current tab
   TablineTabInactive = { fg = color.comment, bg = color.bg_d }, -- every other tab
 
   -- Shared ---------------------------------------------------------
