@@ -444,6 +444,8 @@ hl.plugins.tabline = {
   -- Shared ---------------------------------------------------------
   TablineFill = { fg = color.none, bg = color.bg_d }, -- empty space / separator background
   TablineTrunc = { fg = color.comment, bg = color.bg_d }, -- '…' overflow indicators (both sides)
+  -- Tab seperator ---------------------------------------------------------
+  TablineSep = { fg = color.comment, bg = color.bg_d },
 }
 
 ---@return nil
